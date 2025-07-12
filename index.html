@@ -50,7 +50,7 @@
     document.getElementById("server-address").textContent = serverAddress;
 
     // mcapi.us APIを使ってサーバーステータスを取得
-    fetch(`fetch(`https://mcapi.us/server/status?ip=${serverAddress}`)
+    fetch(`https://mcapi.us/server/status?ip=${serverAddress}`)
       .then(res => res.json())
       .then(data => {
         if (data.online) {
