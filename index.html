@@ -46,11 +46,11 @@
   </footer>
   <script>
     // サーバーアドレスをここで指定
-    const serverAddress = "natural-forces.gl.at.ply.gg:11162";
+    const serverAddress = "17.ip.gl.ply.gg";
     document.getElementById("server-address").textContent = serverAddress;
 
     // mcapi.us APIを使ってサーバーステータスを取得
-    fetch(`https://mcapi.us/server/status?ip=${serverAddress}`)
+    fetch(`https://mcapi.us/server/status?ip={serverAddress}`)
       .then(res => res.json())
       .then(data => {
         if (data.online) {
