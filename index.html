@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Minecraftサーバー紹介</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Minecraftサーバー紹介</h1>
+  </header>
+  <main>
+    <section class="server-info">
+      <h2>サーバー情報</h2>
+      <ul>
+        <li><strong>アドレス:</strong> <span id="server-address">17.ip.gl.ply.gg</span></li>
+        <li><strong>バージョン:</strong> <span id="server-version">-</span></li>
+        <li><strong>プレイヤー数:</strong> <span id="server-players">-</span></li>
+        <li><strong>状態:</strong> <span id="server-status" class="status">取得中...</span></li>
+      </ul>
+    </section>
+    <section>
+      <h2>サーバールール</h2>
+      <ul>
+        <li>他人に迷惑をかけない</li>
+        <li>チート・荒らし禁止</li>
+        <li>楽しくプレイ！</li>
+      </ul>
+    </section>
+    <section>
+      <h2>参加方法</h2>
+      <ol>
+        <li>「17.ip.gl.ply.gg」でサーバー追加</li>
+        <li>推奨バージョンでログイン</li>
+        <li>ルールを守ってプレイ！</li>
+      </ol>
+    </section>
+    <section>
+      <h2>スクリーンショット</h2>
+      <img src="https://placehold.jp/600x300.png?text=Server+Screenshot" alt="サーバースクリーンショット" />
+    </section>
+  </main>
+  <footer>
+    <small>&copy; 2025 Minecraft Server</small>
+  </footer>
+  <script>
+    // サーバーアドレスをここで指定
+    const serverAddress = "17.ip.gl.ply.gg";
+    document.getElementById("server-address").textContent = serverAddress;
+
+    // mcapi.us APIを使ってサーバーステータスを取得
+    fetch(`https://mcapi.us/server/status?ip=${serverAddress}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.online) {
+          document.getElementById("server-status").textContent = "オンライン";
+          document.getElementById("server-status").classList.remove("offline");
+          document.getElementById("server-status").classList.add("online");
+          document.getElementById("server-version").textContent = data.server.name || "1.21.93";
+          document.getElementById("server-players").textContent = data.players.now + " / " + data.players.max;
+        } else {
+          document.getElementById("server-status").textContent = "オフライン";
+          document.getElementById("server-status").classList.remove("online");
+          document.getElementById("server-status").classList.add("offline");
+          document.getElementById("server-version").textContent = "1.21.93";
+          document.getElementById("server-players").textContent = "-";
+        }
+      })
+      .catch(() => {
+        document.getElementById("server-status").textContent = "取得失敗";
+        document.getElementById("server-status").classList.remove("online");
+        document.getElementById("server-status").classList.add("offline");
+      });
+  </script>
+</body>
+</html>
